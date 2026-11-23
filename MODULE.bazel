@@ -1,0 +1,21 @@
+module(name = "systemc_ams_bazel_template")
+
+bazel_dep(name = "rules_cc", version = "0.2.28")
+
+bazel_dep(name = "googletest", version = "1.14.0.bcr.1", dev_dependency = True)
+
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "systemc",
+    build_file = "//ThirdParty/systemc:systemc.BUILD",
+    sha256 = "302e32b1d5175b59e59e40488d026f0624a7bdbc5f3cf50e04e950668c5c4c5d",
+    urls = ["https://github.com/xpanflow/systemc-ams/releases/download/v2.3.4/systemc-2.3.4.zip"],
+)
+
+http_archive(
+    name = "systemc_ams",
+    build_file = "//ThirdParty/systemc_ams:systemc_ams.BUILD",
+    sha256 = "27aa93e087dbe432db460c9da9752ad092edc61dcd09d0dd64a4e8ce332b1ba3",
+    urls = ["https://github.com/xpanflow/systemc-ams/releases/download/v2.3.4/systemc-ams-2.3.4.zip"],
+)

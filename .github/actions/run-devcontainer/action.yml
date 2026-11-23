@@ -1,0 +1,24 @@
+# Copyright (c) 2022-2024 Xiao Pan
+
+name: Run in dev-container
+description: Run a CI stage with devcontainer
+
+inputs:
+  commands:
+    description: Bash commands to run from the repository root
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Build development image
+      shell: bash
+      run: docker build --platform linux/amd64 -t systemc-ams-template .devcontainer
+    - name: Run stage commands
+      shell: bash
+      env:
+        STAGE_COMMANDS: ${{ inputs.commands }}
+      run: |
+        docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp \
+          -v "$GITHUB_WORKSPACE:/work" -w /work systemc-ams-template \
+          bash -euo pipefail -c "$STAGE_COMMANDS"

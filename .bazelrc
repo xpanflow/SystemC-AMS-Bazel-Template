@@ -1,6 +1,23 @@
-build --cxxopt='-std=c++14'
-build --compilation_mode=dbg            # Debug compilation mode (-g)
-build --strip=never                     # Never strip debug information
-build --copt=-fdiagnostics-color=always # enable complier color output
-build --force_pic                       # links prefer PIC pre-built libraries
+# Copyright (c) 2022-2024 Xiao Pan
+
+# Dependencies
+common --enable_bzlmod
+common --noenable_workspace
+
+# Default build. The prebuilt SystemC libraries use the C++14 ABI.
+build --cxxopt=-std=c++14
+build --compilation_mode=dbg
+
+# Build profiles
+build:debug --compilation_mode=dbg
+build:release --compilation_mode=opt
+
+# Tests and coverage
+test --test_output=errors
+coverage --combined_report=lcov
+
+# CI
+common:ci --lockfile_mode=error
+common:ci --color=no
+common:ci --curses=no
 

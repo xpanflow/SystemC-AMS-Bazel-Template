@@ -1,28 +1,15 @@
 {
-    "name": "TemplateDevContainer",
+    "name": "SystemC, TLM, and AMS",
+    "remoteUser": "ubuntu",
     "build": {
         "dockerfile": "Dockerfile"
     },
     "customizations": {
         "vscode": {
-            "extensions": [
-                "BazelBuild.vscode-bazel",
-                "cschlosser.doxdocgen",
-                "ms-vscode.cpptools",
-                "ms-vscode.cpptools-extension-pack",
-                "redhat.vscode-xml",
-                "redhat.vscode-yaml",
-                "mhutchie.git-graph",
-                "ms-vscode.cmake-tools",
-                "vscode-icons-team.vscode-icons",
-                "streetsidesoftware.code-spell-checker",
-                "visualstudioexptteam.vscodeintellicode",
-                "xaver.clang-format"
-            ]
-        },
-        "settings": {
-            "terminal.integrated.defaultProfile.linux": "bash"
+            "extensions": ["BazelBuild.vscode-bazel", "ms-vscode.cpptools"],
+            "settings": {
+                "C_Cpp.clang_format_path": "/usr/bin/clang-format-18"
+            }
         }
     }
 }
-
