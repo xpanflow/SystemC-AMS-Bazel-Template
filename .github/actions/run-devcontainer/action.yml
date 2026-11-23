@@ -19,6 +19,7 @@ runs:
       env:
         STAGE_COMMANDS: ${{ inputs.commands }}
       run: |
-        docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp \
+        # Bazel needs a username when the runner UID has no passwd entry in the image.
+        docker run --rm --user "$(id -u):$(id -g)" -e USER="$(id -un)" -e HOME=/tmp \
           -v "$GITHUB_WORKSPACE:/work" -w /work systemc-ams-template \
           bash -euo pipefail -c "$STAGE_COMMANDS"
